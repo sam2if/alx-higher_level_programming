@@ -1,11 +1,11 @@
 #!/usr/bin/python3
-
-""" 6-base_geometry module """
+"""
+Contains the class BaseGeometry
+"""
 
 
 class BaseGeometry:
-    """ class for calculating area """
-
+    """A class Public instance area"""
     def area(self):
-        """ a method that raises exception """
-        raise Exception('area() is not implemented')
+        """raises an exception"""
+        raise Exception("area() is not implemented")

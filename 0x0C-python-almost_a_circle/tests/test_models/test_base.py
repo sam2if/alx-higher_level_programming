@@ -1,29 +1,37 @@
 #!/usr/bin/python3
-""" Module test_base for unit testing """
-
 import unittest
+import json
 from models.base import Base
 
+
 class TestBase(unittest.TestCase):
+    """Tests to check Base class"""
+    def test_no_id(self):
+        """Tests id as None"""
+        bs = Base()
+        self.assertEqual(bs.id, 1)
 
-    def test_case(self):
-        b1 = Base()
-        self.assertEqual(b1.id, 1)
+    def test_no_id_after_set(self):
+        """Tests id as None after not None"""
+        bs2 = Base()
+        self.assertEqual(bs2.id, 2)
 
-        b2 = Base()
-        self.assertEqual(b2.id, 2)
+    def test_to_json_string(self):
+        """Tests regular to json string"""
+        Base._Base__nb_objects = 0
+        d1 = {"id": 6, "width": 3, "height": 4, "x": 5, "y": 6}
+        d2 = {"id": 5, "width": 4, "height": 6, "x": 7, "y": 0}
+        json_s = Base.to_json_string([d1, d2])
+        self.assertTrue(type(json_s) is str)
+        a = json.loads(json_s)
+        self.assertEqual(a, [d1, d2])
 
-        b3 = Base()
-        self.assertEqual(b3.id, 3)
+    def test_empty_to_json_string(self):
+        """Test for passing empty list/ None"""
+        json_s = Base.to_json_string([])
+        self.assertTrue(type(json_s) is str)
+        self.assertEqual(json_s, "[]")
 
-        b4 = Base(12)
-        self.assertEqual(b4.id, 12)
-
-        b5 = Base()
-        self.assertEqual(b5.id, 4)
-
-        with self.assertRaises(NameError):
-            b6 = Base(Q)
-
-        with self.assertRaises(TypeError):
-            b7 = Base(1, 2)
+    def test_None_to_json_String(self):
+        json_s = Base.to_json_string(None)
+        self.assertEqual(json_s, [])

@@ -1,6 +1,9 @@
 #!/usr/bin/node
+// Requiring fs module in which
+// readFile function is defined.
 const fs = require('fs');
-fs.readFile(process.argv[2], 'utf8', function (err, data) {
+const file = process.argv[2];
+fs.readFile(file, 'utf-8', function (err, data) {
   if (err) {
     console.log(err);
   } else {

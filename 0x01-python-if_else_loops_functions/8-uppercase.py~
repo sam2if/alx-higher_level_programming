@@ -1,5 +1,0 @@
-def uppercase(str):
-    for i in range(65, 91):
-        if ord(str) == i:
-            return True
-        return False

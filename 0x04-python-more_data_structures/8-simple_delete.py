@@ -1,8 +1,5 @@
 #!/usr/bin/python3
 def simple_delete(a_dictionary, key=""):
-    key_list = list(a_dictionary.keys())
-    if key not in key_list:
-        return a_dictionary
-    else:
+    if key in a_dictionary:
         del a_dictionary[key]
-        return a_dictionary
+    return a_dictionary

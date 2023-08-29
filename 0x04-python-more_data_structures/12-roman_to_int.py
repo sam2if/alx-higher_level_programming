@@ -1,24 +1,21 @@
 #!/usr/bin/python3
 def roman_to_int(roman_string):
-    if type(roman_string) == str:
-        my_dict = {
-            'I': 1,
-            'V': 5,
-            'X': 10,
-            'L': 50,
-            'C': 100,
-            'D': 500,
-            'M': 1000
-                }
-        total = 0
-        prev = 0
-        cur = 0
-        for i in range(len(roman_string)):
-            cur = my_dict[roman_string[i]]
-            if cur > prev:
-                total += cur - (2 * prev)
-            else:
-                total += cur
-            prev = cur
-        return total
-    return 0
+    res = 0
+    if not roman_string or not isinstance(roman_string, str):
+        return 0
+    num = 0
+    dictionary = {
+        "M": 1000,
+        "D": 500,
+        "C": 100,
+        "L": 50,
+        "X": 10,
+        "V": 5,
+        "I": 1}
+    for elem in reversed(roman_string):
+        if dictionary[elem] < num:
+            res -= dictionary[elem]
+        else:
+            res += dictionary[elem]
+        num = dictionary[elem]
+    return res
